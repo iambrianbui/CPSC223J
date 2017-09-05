@@ -60,7 +60,43 @@ private JButton exitButton;
 
 private shapeGenUI graphicPanel;
 
+private FlowLayout simpleFlow;
+private GridLayout rowLayout;
 
+public shapeGenUI(){
+  //  frame properties
+  super("Shapes");
+  simpleFlow = new FlowLayout();
+  rowLayout = new GridLayout(1,3);  //1 by 3
+  setLayout(simpleFlow);
+  setSize(frameWidth, frameHeight);
+  setLocationRelativeTo(null);
+
+  //  first panel
+  titlePanel = new JPanel();
+  titlePanel.setSize(frameWidth,50);
+  titlePanel.setBackground(java.awt.Color.white);
+  titlePanel.setLayout(simpleFlow);
+  frameLabel = new JLabel();
+  frameLabel.setText("Shapes, by Brian Bui");
+  frameLabel.setForeground(Color.red);
+  titlePanel.add(frameLabel);
+
+  //  second panel
+  Dimension graphicPanelSize = new Dimension(frameWidth-100, 600);
+  graphicPanel = new shapeGenUI();
+  graphicPanel.setPreferredSize(graphicPanelSize);
+  graphicPanel.setMinimumSize(graphicPanel.getPreferredSize());
+  Color graphicalBG = new Color(0x93,0x93,0x93);
+  graphicPanel.setBackground(graphicalBG);
+
+
+  //  attach the panels to the frame
+  add(titlePanel);
+  add(graphicPanel);
+
+
+}
 
 
 
