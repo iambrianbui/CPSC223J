@@ -21,10 +21,10 @@
 
 import javax.swing.JFrame;
 
-public class Usermain
+public class shapeGenMain
 {public static void main(String[] args)
    {System.out.println("The main function has begun executing.");
-    Graphicinterface user = new Graphicinterface();
+    shapeGenUI user = new shapeGenUI();
     user.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     user.setVisible(true);
     System.out.println("The main function will terminate soon.");
