@@ -41,6 +41,7 @@ public class shapeGenUI extends JFrame{
 private final int frameWidth = 1600;
 private final int frameHeight = 900;
 
+//  gap in between buttons
 private final int hGap=5;
 private final int vGap=5;
 
@@ -193,6 +194,11 @@ graphicPanel.pickBlue();
 
 //  options
   else if (event.getSource()==drawButton){
+    repaint();
+  }
+
+  else if (event.getSource()==clearButton){
+    graphicPanel.clearAll();
     repaint();
   }
 
