@@ -167,10 +167,23 @@ public shapeGenUI(){
 
 private class buttonhandler implements ActionListener{
 public void actionPerformed(ActionEvent event){
-
+//  shapes
   if(event.getSource()==circleButton){
     graphicPanel.changecircle();
   }
+
+
+//  colors
+  else if (event.getSource()==colorRedButton){
+  graphicPanel.pickRed();
+}
+
+
+//  options
+  else if (event.getSource()==drawButton){
+    repaint();
+  }
+
   else if (event.getSource()==exitButton){
     System.exit(0);
   }
