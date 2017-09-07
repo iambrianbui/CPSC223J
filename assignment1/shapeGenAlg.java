@@ -28,19 +28,43 @@ class Graphicpanelclass extends JPanel{
   boolean showrect = false;
   boolean showtri = false;
 
+  boolean showred = false;
+  boolean showgreen = false;
+  boolean showblue = false;
+
   public void changecircle(){
-    showcircle = !showcircle;
+    showcircle = true;
     showrect = false;
     showtri = false;
-    System.out.println("Hey it works!");
+    System.out.println("Circle");
   }
 
-  protected void paintComponent(Graphics g){
-    if(showcircle=true){
-    super.paintComponent(g);
-    g.setColor(Color.BLUE);
-    g.drawRect(20,10,200,100);
+  public void pickRed(){
+    showred = true;
+    showgreen = false;
+    showblue = false;
+    System.out.println("Red");
   }
+
+
+  protected void paintComponent(Graphics g){
+    System.out.println("Finding...");
+    super.paintComponent(g);
+    Graphics2D g2=(Graphics2D)g;
+
+    //  all the reds
+    if (showred==true){
+      g.setColor(Color.RED);
+
+      //  circle
+      if (showcircle==true){
+        g2.setStroke(new BasicStroke(4f));
+        g.drawOval(100,100,200,200);
+      }
+
+
+
+    }
   }
 
 
