@@ -169,14 +169,26 @@ private class buttonhandler implements ActionListener{
 public void actionPerformed(ActionEvent event){
 //  shapes
   if(event.getSource()==circleButton){
-    graphicPanel.changecircle();
+    graphicPanel.changeCircle();
   }
-
+  else if(event.getSource()==rectButton){
+    graphicPanel.changeRect();
+  }
+  else if(event.getSource()==triButton){
+    graphicPanel.changeTri();
+  }
 
 //  colors
   else if (event.getSource()==colorRedButton){
   graphicPanel.pickRed();
 }
+else if (event.getSource()==colorGreenButton){
+graphicPanel.pickGreen();
+}
+else if (event.getSource()==colorBlueButton){
+graphicPanel.pickBlue();
+}
+
 
 
 //  options
