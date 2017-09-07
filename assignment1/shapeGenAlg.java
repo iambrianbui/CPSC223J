@@ -24,6 +24,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 class Graphicpanelclass extends JPanel{
+  //  initialize boolean values, will act like "switches"
   boolean showcircle = false;
   boolean showrect = false;
   boolean showtri = false;
@@ -70,6 +71,19 @@ class Graphicpanelclass extends JPanel{
     showgreen = false;
     showblue = true;
     System.out.println("Blue");
+  }
+
+  public void clearAll(){  //  clear all the colors and shapes
+    showred = false;
+    showgreen = false;
+    showblue = false;
+
+    showcircle = false;
+    showrect = false;
+    showtri = false;
+
+    System.out.println("Clear.");
+
   }
 
 
