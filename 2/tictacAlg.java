@@ -2,7 +2,7 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  14 September 2017
-//Last edited:  14 September 2017
+//Last edited:  21 September 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #2
@@ -26,5 +26,25 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 
 class Graphicpanelclass extends JPanel{
+  //  declarations of variables
+  boolean gameStarted;
+  boolean XisGoing;   //  switching turns
+  char board[][] = {{'A','A','A'}, {'A','A','A'}, {'A','A','A'}};  //  3x3 array to represent the board
 
-}
+  //  the board, note that the format that I will be addressing the board will
+  //  be like a number pad so:
+  //  7 8 9
+  //  4 5 6
+  //  1 2 3  will be the grid
+
+  public void clicked1(){
+    if ((board[0][0] == 'X') || (board[0][0] == 'O')){
+      System.out.println("Already been filled.");
+    }
+    else{
+      System.out.println("Filling..");
+    }
+
+  }  //  end of 1clicked
+
+}  //  end of program
