@@ -99,6 +99,7 @@ public tictacUI(){
   graphicPanel.setMinimumSize(graphicPanel.getPreferredSize());
   Color graphicalBG = new Color(0x8A,0x2B,0xE2);  //  find nicer color maybe
   graphicPanel.setBackground(graphicalBG);
+  graphicPanel.addMouseListener(minnieMouse);
 
   //  third panel:  button/radio panel
   //  radio section
@@ -167,7 +168,8 @@ private class mousehandler implements MouseListener{
   public void mousePressed(MouseEvent ev){
     int mouseX = ev.getX();
     int mouseY = ev.getY();
-    System.out.println("bump");
+    System.out.println(+mouseX);
+    System.out.println(+mouseY);
   }
 
   public void mouseClicked(MouseEvent e){
