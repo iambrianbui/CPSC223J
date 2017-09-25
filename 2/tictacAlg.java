@@ -28,7 +28,7 @@ import java.awt.Graphics;
 class Graphicpanelclass extends JPanel{
   //  declarations of variables
   boolean gameStarted;
-  boolean XisGoing;   //  switching turns
+  boolean XisGoing = true;   //  switching turns
   char board[][] = {{'A','A','A'}, {'A','A','A'}, {'A','A','A'}};  //  3x3 array to represent the board
 
   //  the board, note that the format that I will be addressing the board will
@@ -37,14 +37,73 @@ class Graphicpanelclass extends JPanel{
   //  4 5 6
   //  1 2 3  will be the grid
 
+  public void switchPlayer(){
+    XisGoing = !XisGoing;
+  }
+
   public void clicked1(){
     if ((board[0][0] == 'X') || (board[0][0] == 'O')){
       System.out.println("Already been filled.");
     }
     else{
-      System.out.println("Filling..");
+      if (XisGoing == true){
+        board[0][0] = 'X';
+      }
+      else board[0][0] = 'O';
+    }
+  }  //  end of 1clicked
+
+  public void clicked2(){
+    if ((board[1][0] == 'X') || (board[1][0] == 'O')){
+      System.out.println("Already been filled.");
+    }
+    else{
+      if (XisGoing == true){
+        board[1][0] = 'X';
+      }
+      else board[1][0] = 'O';
+    }
+  }  //  end of 2clicked
+
+
+
+
+  protected void paintComponent(Graphics g){
+    System.out.println("I have been called.");
+    super.paintComponent(g);
+    Graphics2D g2 = (Graphics2D)g;
+    Graphics2D g3 = (Graphics2D)g;
+
+
+
+    //  playing field
+    g2.setColor(Color.BLACK);
+    g2.setStroke(new BasicStroke(4f));
+
+    g2.drawLine(200,0,200,600);
+    g2.drawLine(400,0,400,600);
+    g2.drawLine(0,200,600,200);
+    g2.drawLine(0,400,600,400);
+
+    //  drawing X's
+    g3.setStroke(new BasicStroke(8f));
+    g3.setColor(Color.RED);
+
+    if (board[0][0] == 'X'){
+      g3.drawLine(10,410,190,590);
+      g3.drawLine(10,590,190,410);
     }
 
-  }  //  end of 1clicked
+    if (board[1][0] == 'X'){
+      g3.drawLine(210,410,390,590);
+      g3.drawLine(210,590,390,410);
+    }
+
+
+
+
+
+
+  }  //  end of paint component
 
 }  //  end of program
