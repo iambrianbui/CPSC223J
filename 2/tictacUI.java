@@ -48,6 +48,7 @@ public class tictacUI extends JFrame{
 //  900 width definitely, for the 300x300 squares, 900 minimum height
 //  900 + 40 + 200
 //  define dimensions
+//  because of my chromebook resolution, 600x600 playing field
 private final int frameWidth = 600;
 private final int frameHeight = 740;
 
@@ -168,19 +169,63 @@ private class mousehandler implements MouseListener{
   public void mousePressed(MouseEvent ev){
     int mouseX = ev.getX();
     int mouseY = ev.getY();
-    System.out.println(+mouseX);
-    System.out.println(+mouseY);
-  }
+    // System.out.println(+mouseX);
+    // System.out.println(+mouseY);
 
-  public void mouseClicked(MouseEvent e){
-    System.out.println("clicked");
-   }
+    //  first column
+    if (mouseX >= 0 && mouseX <= 198){
+      if (mouseY >= 0 && mouseY <= 198){
+        System.out.println("7");
+      }
+      if (mouseY >= 202 && mouseY <= 398){
+        System.out.println("4");
+      }
+      if (mouseY >= 402 && mouseY <= 600){
+        System.out.println("1");
+        graphicPanel.clicked1();
+      }
+    }
+
+    //  second column
+    if (mouseX >= 202 && mouseX <= 398){
+      if (mouseY >= 0 && mouseY <= 198){
+        System.out.println("8");
+      }
+      if (mouseY >= 202 && mouseY <= 398){
+        System.out.println("5");
+      }
+      if (mouseY >= 402 && mouseY <= 600){
+        System.out.println("2");
+        graphicPanel.clicked2();
+      }
+    }
+
+    //  third column
+    if (mouseX >= 402 && mouseX <= 600){
+      if (mouseY >= 0 && mouseY <= 198){
+        System.out.println("9");
+      }
+      if (mouseY >= 202 && mouseY <= 398){
+        System.out.println("6");
+      }
+      if (mouseY >= 402 && mouseY <= 600){
+        System.out.println("3");
+      }
+    }
+
+    repaint();
+
+
+
+  }  //  end of mouse pressed
+
 
   //  override existing functions
+  public void mouseClicked(MouseEvent e){ }
   public void mouseReleased(MouseEvent e){ }
   public void mouseEntered(MouseEvent e){ }
   public void mouseExited(MouseEvent e){ }
-}
+}  //  end of mouse listener
 
 
 }  // end of tictacUI
