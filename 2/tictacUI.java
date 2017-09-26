@@ -50,10 +50,12 @@ public class tictacUI extends JFrame{
 //  define dimensions
 //  because of my chromebook resolution, 600x600 playing field
 private final int frameWidth = 600;
-private final int frameHeight = 740;
+private final int frameHeight = 760;
 
 private JPanel titlePanel;
+private JPanel infoPanel;
 private JLabel frameLabel;
+private JLabel infoLabel;
 
 private JLabel radioInstructions;
 private JRadioButton Xback;
@@ -82,9 +84,9 @@ public tictacUI(){
   setSize(frameWidth, frameHeight);
   setLocationRelativeTo(null);
 
-  //  first panel:  information panel
+  //  first panel:  title panel
   titlePanel = new JPanel();
-  titlePanel.setSize(frameWidth, 40);
+  titlePanel.setSize(frameWidth, 30);
   Color greyBG = new Color(0x93,0x93,0x93);
   titlePanel.setBackground(greyBG);
   titlePanel.setLayout(simpleFlow);
@@ -93,7 +95,8 @@ public tictacUI(){
   frameLabel.setForeground(Color.red);
   titlePanel.add(frameLabel);
 
-  //  second panel:  graphic panel
+
+  //  third panel:  graphic panel
   Dimension graphicPanelSize = new Dimension(frameWidth, 600);
   graphicPanel = new Graphicpanelclass();
   graphicPanel.setPreferredSize(graphicPanelSize);
@@ -102,7 +105,7 @@ public tictacUI(){
   graphicPanel.setBackground(graphicalBG);
   graphicPanel.addMouseListener(minnieMouse);
 
-  //  third panel:  button/radio panel
+  //  fourth panel:  button/radio panel
   //  radio section
   buttonPanel = new JPanel();
   buttonPanel.setLayout(bottomLayout);
@@ -180,14 +183,17 @@ private class mousehandler implements MouseListener{
       if (mouseY >= 0 && mouseY <= 198){
         System.out.println("7");
         graphicPanel.clicked7();
+        graphicPanel.gameStatus();
       }
       if (mouseY >= 202 && mouseY <= 398){
         System.out.println("4");
         graphicPanel.clicked4();
+        graphicPanel.gameStatus();
       }
       if (mouseY >= 402 && mouseY <= 600){
         System.out.println("1");
         graphicPanel.clicked1();
+        graphicPanel.gameStatus();
       }
     }
 
@@ -196,14 +202,17 @@ private class mousehandler implements MouseListener{
       if (mouseY >= 0 && mouseY <= 198){
         System.out.println("8");
         graphicPanel.clicked8();
+        graphicPanel.gameStatus();
       }
       if (mouseY >= 202 && mouseY <= 398){
         System.out.println("5");
         graphicPanel.clicked5();
+        graphicPanel.gameStatus();
       }
       if (mouseY >= 402 && mouseY <= 600){
         System.out.println("2");
         graphicPanel.clicked2();
+        graphicPanel.gameStatus();
       }
     }
 
@@ -212,14 +221,17 @@ private class mousehandler implements MouseListener{
       if (mouseY >= 0 && mouseY <= 198){
         System.out.println("9");
         graphicPanel.clicked9();
+        graphicPanel.gameStatus();
       }
       if (mouseY >= 202 && mouseY <= 398){
         System.out.println("6");
         graphicPanel.clicked6();
+        graphicPanel.gameStatus();
       }
       if (mouseY >= 402 && mouseY <= 600){
         System.out.println("3");
         graphicPanel.clicked3();
+        graphicPanel.gameStatus();
       }
     }
 
