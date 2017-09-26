@@ -2,11 +2,11 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  14 September 2017
-//Last edited:  21 September 2017
+//Last edited:  28 September 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #2
-//Due date:
+//Due date:  28 September 2017
 
 //Purpose of this program:
 //This program will simulate a tic tac toe game and use radio buttons to
@@ -45,16 +45,16 @@ import java.awt.Point;
 //  declarations
 public class tictacUI extends JFrame{
 
-//  900 width definitely, for the 300x300 squares, 900 minimum height
+//  900 width, for the 300x300 squares, 900 minimum height
 //  900 + 40 + 200
 //  define dimensions
 //  because of my chromebook resolution, 600x600 playing field
 private final int frameWidth = 600;
 private final int frameHeight = 760;
 
-private JPanel titlePanel;
+private JPanel titlePanel;  //  1
 private JPanel infoPanel;
-private JLabel frameLabel;
+private JLabel frameLabel;  //  3
 private JLabel infoLabel;
 
 private JLabel radioInstructions;
@@ -62,7 +62,7 @@ private JRadioButton Xback;
 private JRadioButton Oback;
 private ButtonGroup backgroundButtons;
 
-private JPanel buttonPanel;
+private JPanel buttonPanel;  //  4
 private JButton newGameButton;
 private JButton exitButton;
 
@@ -95,7 +95,6 @@ public tictacUI(){
   frameLabel.setForeground(Color.red);
   titlePanel.add(frameLabel);
 
-
   //  third panel:  graphic panel
   Dimension graphicPanelSize = new Dimension(frameWidth, 600);
   graphicPanel = new Graphicpanelclass();
@@ -104,6 +103,14 @@ public tictacUI(){
   Color graphicalBG = new Color(0x84,0xE1,0x84);  //  find nicer color maybe
   graphicPanel.setBackground(graphicalBG);
   graphicPanel.addMouseListener(minnieMouse);
+
+  //  second panel:  infor panel
+  infoPanel = new JPanel();
+  infoPanel.setSize(frameWidth, 30);
+  infoPanel.setLayout(simpleFlow);
+  infoLabel = new JLabel();
+  infoLabel.setText(graphicPanel.getText());
+  infoPanel.add(infoLabel);
 
   //  fourth panel:  button/radio panel
   //  radio section
@@ -126,8 +133,10 @@ public tictacUI(){
   exitButton = new JButton("Quit");
   buttonPanel.add(exitButton);
 
+  //  putting it in order
   add(titlePanel);
   add(graphicPanel);
+  add(infoPanel);
   add(buttonPanel);
 
   //  handlers and listeners
@@ -148,7 +157,9 @@ private class buttonhandler implements ActionListener{
   public void actionPerformed(ActionEvent event){
     if (event.getSource()==newGameButton){
       graphicPanel.newGame();
+      backgroundButtons.clearSelection();
       repaint();
+      infoLabel.setText(graphicPanel.getText());
     }
     if (event.getSource()==exitButton){
       System.exit(0);
@@ -156,7 +167,7 @@ private class buttonhandler implements ActionListener{
   }
 }  //  end of button definitions
 
-//  radio
+//  radio buttons
 private class radiohandler implements ItemListener{
   public void itemStateChanged(ItemEvent event){
     if (Xback.isSelected()){
@@ -168,7 +179,7 @@ private class radiohandler implements ItemListener{
       graphicPanel.Ofirst();
     }
   }
-}
+}  //  end of radio buttons
 
 //  mouse
 private class mousehandler implements MouseListener{
@@ -236,9 +247,7 @@ private class mousehandler implements MouseListener{
     }
 
     repaint();
-
-
-
+    infoLabel.setText(graphicPanel.getText());
   }  //  end of mouse pressed
 
 
