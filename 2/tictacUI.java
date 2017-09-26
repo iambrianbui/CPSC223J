@@ -98,7 +98,7 @@ public tictacUI(){
   graphicPanel = new Graphicpanelclass();
   graphicPanel.setPreferredSize(graphicPanelSize);
   graphicPanel.setMinimumSize(graphicPanel.getPreferredSize());
-  Color graphicalBG = new Color(0x8A,0x2B,0xE2);  //  find nicer color maybe
+  Color graphicalBG = new Color(0x84,0xE1,0x84);  //  find nicer color maybe
   graphicPanel.setBackground(graphicalBG);
   graphicPanel.addMouseListener(minnieMouse);
 
@@ -144,7 +144,8 @@ public tictacUI(){
 private class buttonhandler implements ActionListener{
   public void actionPerformed(ActionEvent event){
     if (event.getSource()==newGameButton){
-
+      graphicPanel.newGame();
+      repaint();
     }
     if (event.getSource()==exitButton){
       System.exit(0);
@@ -157,9 +158,11 @@ private class radiohandler implements ItemListener{
   public void itemStateChanged(ItemEvent event){
     if (Xback.isSelected()){
       System.out.println("X");
+      graphicPanel.Xfirst();
     }
     else if (Oback.isSelected()){
       System.out.println("O");
+      graphicPanel.Ofirst();
     }
   }
 }
@@ -176,9 +179,11 @@ private class mousehandler implements MouseListener{
     if (mouseX >= 0 && mouseX <= 198){
       if (mouseY >= 0 && mouseY <= 198){
         System.out.println("7");
+        graphicPanel.clicked7();
       }
       if (mouseY >= 202 && mouseY <= 398){
         System.out.println("4");
+        graphicPanel.clicked4();
       }
       if (mouseY >= 402 && mouseY <= 600){
         System.out.println("1");
@@ -190,9 +195,11 @@ private class mousehandler implements MouseListener{
     if (mouseX >= 202 && mouseX <= 398){
       if (mouseY >= 0 && mouseY <= 198){
         System.out.println("8");
+        graphicPanel.clicked8();
       }
       if (mouseY >= 202 && mouseY <= 398){
         System.out.println("5");
+        graphicPanel.clicked5();
       }
       if (mouseY >= 402 && mouseY <= 600){
         System.out.println("2");
@@ -204,12 +211,15 @@ private class mousehandler implements MouseListener{
     if (mouseX >= 402 && mouseX <= 600){
       if (mouseY >= 0 && mouseY <= 198){
         System.out.println("9");
+        graphicPanel.clicked9();
       }
       if (mouseY >= 202 && mouseY <= 398){
         System.out.println("6");
+        graphicPanel.clicked6();
       }
       if (mouseY >= 402 && mouseY <= 600){
         System.out.println("3");
+        graphicPanel.clicked3();
       }
     }
 
