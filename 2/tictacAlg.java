@@ -27,6 +27,7 @@ import java.awt.Graphics;
 
 class Graphicpanelclass extends JPanel{
   //  declarations of variables
+  String text = "-";
   boolean canPlay = false;
   int turnCount = 0;
   boolean XisGoing = true;   //  switching turns
@@ -82,6 +83,7 @@ class Graphicpanelclass extends JPanel{
       }
       else board[0][0] = 'O';
       switchPlayer();
+      increaseCount();
     }
   }
   else
@@ -101,6 +103,7 @@ class Graphicpanelclass extends JPanel{
       }
       else board[1][0] = 'O';
       switchPlayer();
+      increaseCount();
     }
   }
   else
@@ -119,6 +122,7 @@ class Graphicpanelclass extends JPanel{
       }
       else board[2][0] = 'O';
       switchPlayer();
+      increaseCount();
     }
   }
   else
@@ -137,6 +141,7 @@ class Graphicpanelclass extends JPanel{
       }
       else board[0][1] = 'O';
       switchPlayer();
+      increaseCount();
     }
   }
   else
@@ -155,6 +160,7 @@ class Graphicpanelclass extends JPanel{
       }
       else board[1][1] = 'O';
       switchPlayer();
+      increaseCount();
     }
   }
   else
@@ -173,6 +179,7 @@ class Graphicpanelclass extends JPanel{
       }
       else board[2][1] = 'O';
       switchPlayer();
+      increaseCount();
     }
   }
   else
@@ -191,6 +198,7 @@ class Graphicpanelclass extends JPanel{
       }
       else board[0][2] = 'O';
       switchPlayer();
+      increaseCount();
     }
   }
   else
@@ -209,6 +217,7 @@ class Graphicpanelclass extends JPanel{
       }
       else board[1][2] = 'O';
       switchPlayer();
+      increaseCount();
     }
   }
   else
@@ -227,6 +236,7 @@ class Graphicpanelclass extends JPanel{
       }
       else board[2][2] = 'O';
       switchPlayer();
+      increaseCount();
     }
   }
   else
@@ -235,11 +245,15 @@ class Graphicpanelclass extends JPanel{
   }  //  end of 9clicked
 //  end of clicked functions
 
+public void increaseCount(){
+  if(turnCount<10){
+    turnCount++;
+  }
+}
+
 //  check
   public void gameStatus(){
-    if(turnCount<10){
-      turnCount++;
-    }
+
 
     //  rows 1,2,3
     //  row 1
