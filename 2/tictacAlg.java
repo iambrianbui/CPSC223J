@@ -2,11 +2,11 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  14 September 2017
-//Last edited:  25 September 2017
+//Last edited:  26 September 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #2
-//Due date:
+//Due date:  28 September 2017
 
 //Purpose of this program:
 //This program will simulate a tic tac toe game and use radio buttons to
@@ -16,6 +16,8 @@
 //File name:  tictacAlg.java
 //Purpose of this specific source file:
 //  Hold the boolean values of the program and win conditions.
+//  Also handles the drawing and when to draw values
+
 
 //Tier 3
 
@@ -28,10 +30,15 @@ import java.awt.Graphics;
 class Graphicpanelclass extends JPanel{
   //  declarations of variables
   String text = "-";
-  boolean canPlay = false;
-  int turnCount = 0;
+  boolean canPlay = false;  //  X/O has been selected
+  int turnCount = 0;  //  if = 9, then tie
   boolean XisGoing = true;   //  switching turns
   char board[][] = {{'A','A','A'}, {'A','A','A'}, {'A','A','A'}};  //  3x3 array to represent the board
+
+//  to update text UI side
+public String getText(){
+  return text;
+}
 
   //  the board, note that the format that I will be addressing the board will
   //  be like a number pad so:
@@ -69,13 +76,16 @@ class Graphicpanelclass extends JPanel{
     }
     canPlay = false;
     turnCount=0;
-  }
+    text = "The board has been cleared!";
+  }  //  end of newGame function
+
+
 
 //  clicked functions
   public void clicked1(){
     if(canPlay==true){
     if ((board[0][0] == 'X') || (board[0][0] == 'O')){
-      System.out.println("Already been filled.");
+      text = "Already been filled.";
     }
     else{
       if (XisGoing == true){
@@ -87,7 +97,7 @@ class Graphicpanelclass extends JPanel{
     }
   }
   else
-      System.out.println("Game has not started yet.");
+      text = "Game has not started yet.";
 
 
   }  //  end of 1clicked
@@ -95,7 +105,7 @@ class Graphicpanelclass extends JPanel{
   public void clicked2(){
         if(canPlay==true){
     if ((board[1][0] == 'X') || (board[1][0] == 'O')){
-      System.out.println("Already been filled.");
+      text = "Already been filled.";
     }
     else{
       if (XisGoing == true){
@@ -107,14 +117,14 @@ class Graphicpanelclass extends JPanel{
     }
   }
   else
-      System.out.println("Game has not started yet.");
+      text = "Game has not started yet.";
 
   }  //  end of 2clicked
 
   public void clicked3(){
         if(canPlay==true){
     if ((board[2][0] == 'X') || (board[2][0] == 'O')){
-      System.out.println("Already been filled.");
+      text = "Already been filled.";
     }
     else{
       if (XisGoing == true){
@@ -126,14 +136,14 @@ class Graphicpanelclass extends JPanel{
     }
   }
   else
-      System.out.println("Game has not started yet.");
+      text = "Game has not started yet.";
 
   }  //  end of 3clicked
 
   public void clicked4(){
         if(canPlay==true){
     if ((board[0][1] == 'X') || (board[0][1] == 'O')){
-      System.out.println("Already been filled.");
+      text = "Already been filled.";
     }
     else{
       if (XisGoing == true){
@@ -145,14 +155,14 @@ class Graphicpanelclass extends JPanel{
     }
   }
   else
-      System.out.println("Game has not started yet.");
+      text = "Game has not started yet.";
 
   }  //  end of 4clicked
 
   public void clicked5(){
         if(canPlay==true){
     if ((board[1][1] == 'X') || (board[1][1] == 'O')){
-      System.out.println("Already been filled.");
+      text = "Already been filled.";
     }
     else{
       if (XisGoing == true){
@@ -164,14 +174,14 @@ class Graphicpanelclass extends JPanel{
     }
   }
   else
-      System.out.println("Game has not started yet.");
+      text = "Game has not started yet.";
 
   }  //  end of 5clicked
 
   public void clicked6(){
         if(canPlay==true){
     if ((board[2][1] == 'X') || (board[2][1] == 'O')){
-      System.out.println("Already been filled.");
+      text = "Already been filled.";
     }
     else{
       if (XisGoing == true){
@@ -183,14 +193,14 @@ class Graphicpanelclass extends JPanel{
     }
   }
   else
-      System.out.println("Game has not started yet.");
+      text = "Game has not started yet.";
 
   }  //  end of 6clicked
 
   public void clicked7(){
         if(canPlay==true){
     if ((board[0][2] == 'X') || (board[0][2] == 'O')){
-      System.out.println("Already been filled.");
+      text = "Already been filled.";
     }
     else{
       if (XisGoing == true){
@@ -202,14 +212,14 @@ class Graphicpanelclass extends JPanel{
     }
   }
   else
-      System.out.println("Game has not started yet.");
+      text = "Game has not started yet.";
 
   }  //  end of 7clicked
 
   public void clicked8(){
         if(canPlay==true){
     if ((board[1][2] == 'X') || (board[1][2] == 'O')){
-      System.out.println("Already been filled.");
+      text = "Already been filled.";
     }
     else{
       if (XisGoing == true){
@@ -221,14 +231,14 @@ class Graphicpanelclass extends JPanel{
     }
   }
   else
-      System.out.println("Game has not started yet.");
+      text = "Game has not started yet.";
 
   }  //  end of 8clicked
 
   public void clicked9(){
         if(canPlay==true){
     if ((board[2][2] == 'X') || (board[2][2] == 'O')){
-      System.out.println("Already been filled.");
+      text = "Already been filled.";
     }
     else{
       if (XisGoing == true){
@@ -240,30 +250,33 @@ class Graphicpanelclass extends JPanel{
     }
   }
   else
-      System.out.println("Game has not started yet.");
+      text = "Game has not started yet.";
 
   }  //  end of 9clicked
 //  end of clicked functions
 
+
+
+//  increase the turn count if still playing
 public void increaseCount(){
   if(turnCount<10){
     turnCount++;
   }
 }
 
-//  check
+
+
+//  check the game status
   public void gameStatus(){
-
-
     //  rows 1,2,3
     //  row 1
     if ((board[0][0]==board[1][0])&&(board[0][0])==board[2][0]){
       if (board[0][0]=='X'){
-        System.out.println("X wins!");
+        text = "X wins!";
         canPlay=false;
     }  //  x
     else if (board[0][0]=='O'){
-      System.out.println("O wins!");
+      text = "O wins!";
       canPlay=false;
     }  // o
     }
@@ -271,11 +284,11 @@ public void increaseCount(){
     //  row 2
     else if ((board[0][1]==board[1][1])&&(board[0][1])==board[2][1]){
       if (board[0][1]=='X'){
-        System.out.println("X wins!");
+        text = "X wins!";
         canPlay=false;
     }  //  x
     else if (board[0][1]=='O'){
-      System.out.println("O wins!");
+      text = "O wins!";
       canPlay=false;
     }  //  o
     }
@@ -283,11 +296,11 @@ public void increaseCount(){
     //  row 3
     else if ((board[0][2]==board[1][2])&&(board[0][2])==board[2][2]){
       if (board[0][2]=='X'){
-        System.out.println("X wins!");
+        text = "X wins!";
         canPlay=false;
     }  //  x
     else if (board[0][2]=='O'){
-      System.out.println("O wins!");
+      text = "O wins!";
       canPlay=false;
     }  //  o
     }
@@ -296,11 +309,11 @@ public void increaseCount(){
     //  column 1
     else if ((board[0][0]==board[0][1])&&(board[0][0])==board[0][2]){
       if (board[0][0]=='X'){
-        System.out.println("X wins!");
+        text = "X wins!";
         canPlay=false;
     }  //  x
     else if (board[0][0]=='O'){
-      System.out.println("O wins!");
+      text = "O wins!";
       canPlay=false;
     }  // o
     }
@@ -308,11 +321,11 @@ public void increaseCount(){
     //  column 2
     else if ((board[1][0]==board[1][1])&&(board[1][0])==board[1][2]){
       if (board[1][0]=='X'){
-        System.out.println("X wins!");
+        text = "X wins!";
         canPlay=false;
     }  //  x
     else if (board[1][0]=='O'){
-      System.out.println("O wins!");
+      text = "O wins!";
       canPlay=false;
     }  // o
     }
@@ -320,11 +333,11 @@ public void increaseCount(){
     //  column 3
     else if ((board[2][0]==board[2][1])&&(board[2][0])==board[2][2]){
       if (board[2][0]=='X'){
-        System.out.println("X wins!");
+        text = "X wins!";
         canPlay=false;
     }  //  x
     else if (board[2][0]=='O'){
-      System.out.println("O wins!");
+      text = "O wins!";
       canPlay=false;
     }  // o
     }
@@ -332,36 +345,36 @@ public void increaseCount(){
     // diagonals
     else if ((board[0][0]==board[1][1])&&(board[0][0])==board[2][2]){
       if (board[0][0]=='X'){
-        System.out.println("X wins!");
+        text = "X wins!";
         canPlay=false;
     }  //  x
     else if (board[0][0]=='O'){
-      System.out.println("O wins!");
+      text = "O wins!";
       canPlay=false;
     }  // o
     }
 
     else if ((board[0][2]==board[1][1])&&(board[0][2])==board[2][0]){
       if (board[0][2]=='X'){
-        System.out.println("X wins!");
+        text = "X wins!";
         canPlay=false;
     }  //  x
     else if (board[0][2]=='O'){
-      System.out.println("O wins!");
+      text = "O wins!";
       canPlay=false;
     }  // o
     }
+
+    //  tie
     else if (turnCount>=9){
-      System.out.println("It's a tie!");
+      text = "It's a tie!";
       canPlay=false;
     }
-
-  }
-
+  }  //  end of gameStatus
 
 
 
-
+//  handle the painting
   protected void paintComponent(Graphics g){
     //  System.out.println("I have been called.");
     super.paintComponent(g);
@@ -460,9 +473,6 @@ public void increaseCount(){
     if (board[2][2] == 'O'){
       g3.drawOval(410,10,180,180);
     }
-
-
-
 
   }  //  end of paint component
 
