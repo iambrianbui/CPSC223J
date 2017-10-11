@@ -35,6 +35,12 @@ import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+
+import javax.swing.Timer;
+import java.lang.Math;
+
 //  declarations
 public class trafficLightUI extends JFrame{
   //  150x150 circles, 200 width
@@ -61,6 +67,11 @@ public class trafficLightUI extends JFrame{
   private JPanel dummy2;
 
   private Graphicpanelclass graphicPanel;
+
+  private Timer message_controller;
+
+  private final double minimum_speed_allowed = 0.0000001;
+  private int length_of_initial_delay;
 
   private FlowLayout simpleFlow;
   private GridLayout bottomLayout;
@@ -129,6 +140,45 @@ public class trafficLightUI extends JFrame{
     add(titlePanel);
     add(graphicPanel);
     add(buttonPanel);
+
+    //  handlers and listeners
+    buttonhandler bhandle = new buttonhandler();
+    startButton.addActionListener(bhandle);
+    pauseButton.addActionListener(bhandle);
+    exitButton.addActionListener(bhandle);
+
+    length_of_initial_delay = (int)100;
+    message_controller = new Timer(length_of_initial_delay, bhandle);
+
+}  //  end of constructor
+
+//  buttons
+private class buttonhandler implements ActionListener{
+  public int index = 0;
+  public void actionPerformed(ActionEvent event){
+    if (event.getSource()==startButton){
+      message_controller.start();
+    }
+    else if (event.getSource()==pauseButton){
+
+    }
+    else if (event.getSource()==exitButton){
+      System.exit(0);
+    }
+    else if (event.getSource()==message_controller){
+      index = graphicPanel.getIndex();
+      switch(index){
+        case 0: message_controller.setDelay(1000);
+        break;
+        case 1: message_controller.setDelay(3000);
+        break;
+        case 2: message_controller.setDelay(4000);
+        break;
+      }
+      repaint();
+    }
   }
+}  //  end of actionlistener
+
 
 }
