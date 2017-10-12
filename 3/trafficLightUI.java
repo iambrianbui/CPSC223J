@@ -43,13 +43,13 @@ import java.lang.Math;
 
 //  declarations
 public class trafficLightUI extends JFrame{
-  //  150x150 circles, 200 width
-  //  500 height
+  //  150x150 circles, 400 width
+  //  620 height
 
   private final int frameWidth = 400;
   private final int frameHeight = 620;
 
-  private JPanel titlePanel;  //  1
+  private JPanel titlePanel;                       //  1
   private JLabel frameLabel;
 
   private JLabel radioInstructions;
@@ -58,7 +58,7 @@ public class trafficLightUI extends JFrame{
   private JRadioButton fastBack;
   private ButtonGroup backgroundButtons;
 
-  private JPanel buttonPanel;  //  3
+  private JPanel buttonPanel;                     //  3
   private JButton startButton;
   private JButton pauseButton;
   private JButton exitButton;
@@ -66,10 +66,11 @@ public class trafficLightUI extends JFrame{
   private JPanel dummy1;
   private JPanel dummy2;
 
-  private Graphicpanelclass graphicPanel;
+  private Graphicpanelclass graphicPanel;         //  2
 
-  private Timer message_controller;
+  private Timer message_controller;                 //  actual timer function
 
+  //  timer parameters
   private final double minimum_speed_allowed = 0.0000001;
   private int length_of_initial_delay;
 
@@ -80,7 +81,7 @@ public class trafficLightUI extends JFrame{
     //  frame properties
     super("Traffic Light");
     simpleFlow = new FlowLayout();
-    bottomLayout = new GridLayout(3,3);  //  adjust later
+    bottomLayout = new GridLayout(3,3);
     setLayout(simpleFlow);
     setSize(frameWidth, frameHeight);
     setLocationRelativeTo(null);
@@ -105,7 +106,6 @@ public class trafficLightUI extends JFrame{
     graphicPanel.setBackground(goldenrod);
 
     //  third panel:  buttons and such
-    //  first button
     buttonPanel = new JPanel();
     buttonPanel.setLayout(bottomLayout);
 
@@ -119,6 +119,7 @@ public class trafficLightUI extends JFrame{
     //  radio sections
     dummy1 = new JPanel();
     buttonPanel.add(dummy1);
+
     radioInstructions = new JLabel("Rate of Change:");
 
     slowBack = new JRadioButton("Slow", false);
@@ -137,7 +138,7 @@ public class trafficLightUI extends JFrame{
     buttonPanel.add(medBack);
     buttonPanel.add(fastBack);
 
-
+//  attaching
     add(titlePanel);
     add(graphicPanel);
     add(buttonPanel);
@@ -157,8 +158,9 @@ public class trafficLightUI extends JFrame{
     message_controller = new Timer(length_of_initial_delay, bhandle);
 
 }  //  end of constructor
-int t1 = 1000, t2 = 3000, t3 = 4000;
 
+//  initial time delays
+int t1 = 1000, t2 = 3000, t3 = 4000;
 
 private class radiohandler implements ItemListener{
   public void itemStateChanged(ItemEvent event){
@@ -166,6 +168,7 @@ private class radiohandler implements ItemListener{
       t1 = 1000;  //  yellow
       t2 = 3000;  //  GREEN
       t3 = 4000;  //  red
+      //  don't ask me why it's in this order
     }
     if(medBack.isSelected()){
       t1 = 500;
@@ -184,17 +187,20 @@ private class radiohandler implements ItemListener{
 private class buttonhandler implements ActionListener{
   public int index = 0;
   public void actionPerformed(ActionEvent event){
+      //  power on
     if (event.getSource()==startButton){
       message_controller.start();
       graphicPanel.power = true;
     }
+      //  pause
     else if (event.getSource()==pauseButton){
       message_controller.stop();
-
     }
+      //  exit
     else if (event.getSource()==exitButton){
       System.exit(0);
     }
+      //  traffic handling
     else if (event.getSource()==message_controller){
       index = graphicPanel.getIndex();
       switch(index){
