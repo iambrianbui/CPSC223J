@@ -25,9 +25,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+//  start coding
 class Graphicpanelclass extends JPanel{
-  int index = 0;
-  boolean power = false;
+  int index = 0;                             //  index for lights
+  boolean power = false;                     //  is the power on?
 
 
   protected void paintComponent(Graphics g){
@@ -41,11 +42,13 @@ class Graphicpanelclass extends JPanel{
     g2.drawOval(28,158,150,150);
     g2.drawOval(28,313,150,150);
 
+    //  fills
     g2.setColor(Color.GRAY);
     g2.fillOval(28,3,150,150);
     g2.fillOval(28,158,150,150);
     g2.fillOval(28,313,150,150);
 
+    //  actual traffic lights
     if (power==true){
     switch(index){
       case 0: g2.setColor(Color.RED);
@@ -58,9 +61,11 @@ class Graphicpanelclass extends JPanel{
       g2.fillOval(28,313,150,150);
       break;
     }
-    index = (index+1)%3;
+    index = (index+1)%3;                      //  cycle
   }
   }
+
+  //  return index to the UI
   public int getIndex(){
     return index;
   }
