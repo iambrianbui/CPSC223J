@@ -13,7 +13,7 @@
 //the lights flicker at different times, prompted by the user to go faster
 //or slower.
 
-//File name:  trafficLightUI.java
+//File name:  trafficLightAlg.java
 //Purpose of this specific source file:
 //  Handle boolean values and redrawing the program.
 
