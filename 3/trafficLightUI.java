@@ -147,10 +147,37 @@ public class trafficLightUI extends JFrame{
     pauseButton.addActionListener(bhandle);
     exitButton.addActionListener(bhandle);
 
+    radiohandler rlistener = new radiohandler();
+    slowBack.addItemListener(rlistener);
+    medBack.addItemListener(rlistener);
+    fastBack.addItemListener(rlistener);
+
     length_of_initial_delay = (int)100;
     message_controller = new Timer(length_of_initial_delay, bhandle);
 
 }  //  end of constructor
+int t1 = 1000, t2 = 3000, t3 = 4000;
+
+
+private class radiohandler implements ItemListener{
+  public void itemStateChanged(ItemEvent event){
+    if(slowBack.isSelected()){
+      t1 = 1000;  //  yellow
+      t2 = 3000;  //  GREEN
+      t3 = 4000;  //  red
+    }
+    if(medBack.isSelected()){
+      t1 = 500;
+      t2 = 1500;
+      t3 = 2000;
+    }
+    if(fastBack.isSelected()){
+      t1 = 250;
+      t2 = 750;
+      t3 = 1000;
+    }
+  }
+}
 
 //  buttons
 private class buttonhandler implements ActionListener{
@@ -160,6 +187,7 @@ private class buttonhandler implements ActionListener{
       message_controller.start();
     }
     else if (event.getSource()==pauseButton){
+      message_controller.stop();
 
     }
     else if (event.getSource()==exitButton){
@@ -168,11 +196,11 @@ private class buttonhandler implements ActionListener{
     else if (event.getSource()==message_controller){
       index = graphicPanel.getIndex();
       switch(index){
-        case 0: message_controller.setDelay(1000);
+        case 0: message_controller.setDelay(t1);
         break;
-        case 1: message_controller.setDelay(3000);
+        case 1: message_controller.setDelay(t2);
         break;
-        case 2: message_controller.setDelay(4000);
+        case 2: message_controller.setDelay(t3);
         break;
       }
       repaint();
