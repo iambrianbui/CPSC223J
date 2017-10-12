@@ -2,7 +2,7 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  3 October 2017
-//Last edited:  3 October 2017
+//Last edited:  12 October 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #3
@@ -101,7 +101,8 @@ public class trafficLightUI extends JFrame{
     graphicPanel = new Graphicpanelclass();
     graphicPanel.setPreferredSize(graphicPanelSize);
     graphicPanel.setMinimumSize(graphicPanel.getPreferredSize());
-    graphicPanel.setBackground(greyBG);
+    Color goldenrod = new Color(0xcd, 0x95, 0x0c);
+    graphicPanel.setBackground(goldenrod);
 
     //  third panel:  buttons and such
     //  first button
@@ -152,7 +153,7 @@ public class trafficLightUI extends JFrame{
     medBack.addItemListener(rlistener);
     fastBack.addItemListener(rlistener);
 
-    length_of_initial_delay = (int)100;
+    length_of_initial_delay = (int)2000;
     message_controller = new Timer(length_of_initial_delay, bhandle);
 
 }  //  end of constructor
@@ -185,6 +186,7 @@ private class buttonhandler implements ActionListener{
   public void actionPerformed(ActionEvent event){
     if (event.getSource()==startButton){
       message_controller.start();
+      graphicPanel.power = true;
     }
     else if (event.getSource()==pauseButton){
       message_controller.stop();
