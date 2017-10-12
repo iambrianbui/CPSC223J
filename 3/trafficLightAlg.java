@@ -2,7 +2,7 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  3 October 2017
-//Last edited:  3 October 2017
+//Last edited:  12 October 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #3
@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 
 class Graphicpanelclass extends JPanel{
   int index = 0;
+  boolean power = false;
 
 
   protected void paintComponent(Graphics g){
@@ -35,11 +36,17 @@ class Graphicpanelclass extends JPanel{
 
     //  circles
     g2.setColor(Color.BLACK);
-    g2.setStroke(new BasicStroke(3f));
+    g2.setStroke(new BasicStroke(4f));
     g2.drawOval(28,3,150,150);
     g2.drawOval(28,158,150,150);
     g2.drawOval(28,313,150,150);
 
+    g2.setColor(Color.GRAY);
+    g2.fillOval(28,3,150,150);
+    g2.fillOval(28,158,150,150);
+    g2.fillOval(28,313,150,150);
+
+    if (power==true){
     switch(index){
       case 0: g2.setColor(Color.RED);
       g2.fillOval(28,3,150,150);
@@ -52,6 +59,7 @@ class Graphicpanelclass extends JPanel{
       break;
     }
     index = (index+1)%3;
+  }
   }
   public int getIndex(){
     return index;
