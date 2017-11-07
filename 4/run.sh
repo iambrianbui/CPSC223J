@@ -23,16 +23,16 @@ rm *.class
 echo View list of source files
 ls -l *.java
 
-echo Compile travellingBallAlg.java
-javac travellingBallAlg.java
+echo Compile ballAlg.java
+javac ballAlg.java
 
-echo Compile travellingBallUI.java
-javac travellingBallUI.java
+echo Compile ballUI.java
+javac ballUI.java
 
-echo Compile travellingBallMain.java
-javac travellingBallMain.java
+echo Compile ballMain.java
+javac ballMain.java
 
 echo Execute the graphic display demonstration.
-java travellingBallMain
+java ballMain
 s
 echo End of execution.  Have a nice day.
