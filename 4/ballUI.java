@@ -2,7 +2,7 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  31 October 2017
-//Last edited:  5 November 2017
+//Last edited:  12 November 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #4
@@ -139,17 +139,41 @@ public class ballUI extends JFrame{
         exitButton = new JButton("Exit");
         buttonPanel.add(exitButton);
 
-
-
         //  attaching
         add(titlePanel);
         add(graphicPanel);
         add(buttonPanel);
 
+        //  handlers and listeners
+        buttonhandler bhandle = new buttonhandler();
+        startButton.addActionListener(bhandle);
+        exitButton.addActionListener(bhandle);
+
 
     //    clockHandler = new Clockhandlerclass();
 
     }  //  end of constructor
+
+//  buttons
+private class buttonhandler implements ActionListener{
+    public void actionPerformed(ActionEvent event){
+        if (event.getSource()==startButton){
+            float speed = 0;
+            String s = textSpeed.getText();
+            try{
+            speed = Float.parseFloat(s);
+        } catch(NumberFormatException e){
+            System.out.println("not a float");
+        }
+            javaCoord.setText("Speed is:  " +speed);
+            graphicPanel.initBall();
+            repaint();
+        }
+        else if(event.getSource() == exitButton){
+            System.exit(0);
+        }
+    }
+}
 
 
 
