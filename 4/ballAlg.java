@@ -2,7 +2,7 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  31 October 2017
-//Last edited:  12 November 2017
+//Last edited:  13 November 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #4
@@ -36,6 +36,10 @@ class Graphicpanelclass extends JPanel{
     double ballRadius = 8;
     double ballDia = 2*ballRadius;
     boolean motion = false;
+    double speed = 0;
+    double angle = 0;
+    double dx = 0;
+    double dy = 0;
 
 
     protected void paintComponent(Graphics g){
@@ -64,6 +68,17 @@ class Graphicpanelclass extends JPanel{
     }
 
 }  //  end of paintComponent
+
+    public void initSpeedAngle(float sp, float an){
+        speed = sp;
+        angle = an;
+        angle = Math.toRadians(an);
+        dx = speed * Math.cos(angle);
+        dy = speed * Math.sin(angle);
+        System.out.println(angle);
+
+    }
+
     public void initBall(){
         ballCentX = 300;
         ballCentY = 200;
@@ -71,6 +86,18 @@ class Graphicpanelclass extends JPanel{
         ballUCY = ballCentY - ballRadius;
         motion = true;
 
+    }  //  end of initBall
+
+    public boolean moveBall(){
+        boolean successfulMove = false;
+        if (ballCentX+ballRadius>=0.0 && ballCentY+ballRadius>=0.0 && ballCentX-ballRadius<=600 && ballCentY-ballRadius<=400){
+            ballCentX = ballCentX + dx;
+            ballCentY = ballCentY - dy;
+            ballUCX = ballCentX - ballRadius;
+            ballUCY = ballCentY - ballRadius;
+            successfulMove=true;
+        }
+        return successfulMove;
     }
 
 }  //  end of Graphicpanelclass
