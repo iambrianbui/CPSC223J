@@ -2,7 +2,7 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  31 October 2017
-//Last edited:  12 November 2017
+//Last edited:  13 November 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #4
@@ -66,7 +66,6 @@ public class ballUI extends JFrame{
 
     Timer refreshClock;
     Timer motionClock;
-    //  Clockhandlerclass clockHandler;
     double xDirection;
     double yDirection;
     double refreshFPS = 24;                             //  Hz FPS
@@ -74,7 +73,7 @@ public class ballUI extends JFrame{
     double motionClockRate = 20;                        //  How many updates per second
     int motionClockDelayInt;
     final double msPerSec = 1000;
-    double ballSpeed;
+
 
     private FlowLayout simpleFlow;
     private GridLayout bottomGrid;
@@ -149,8 +148,15 @@ public class ballUI extends JFrame{
         startButton.addActionListener(bhandle);
         exitButton.addActionListener(bhandle);
 
+        clockhandler chandle = new clockhandler();
 
-    //    clockHandler = new Clockhandlerclass();
+        //  refresh clock
+        refreshClockDelayInt = (int)Math.round(msPerSec/refreshFPS);
+        refreshClock = new Timer(refreshClockDelayInt, chandle);
+
+        //  motion clock
+        motionClockDelayInt = (int)Math.round(msPerSec/motionClockRate);
+        motionClock = new Timer(motionClockDelayInt, chandle);
 
     }  //  end of constructor
 
@@ -159,21 +165,50 @@ private class buttonhandler implements ActionListener{
     public void actionPerformed(ActionEvent event){
         if (event.getSource()==startButton){
             float speed = 0;
+            float angle = 0;
             String s = textSpeed.getText();
             try{
-            speed = Float.parseFloat(s);
-        } catch(NumberFormatException e){
-            System.out.println("not a float");
-        }
+                speed = Float.parseFloat(s);
+            } catch(NumberFormatException e){
+                System.out.println("not a float");
+            }
+            s = textAngle.getText();
+            try{
+                angle = Float.parseFloat(s);
+            } catch(NumberFormatException e){
+                System.out.println("not a float, angle");
+            }
             javaCoord.setText("Speed is:  " +speed);
+            graphicPanel.initSpeedAngle(speed, angle);
             graphicPanel.initBall();
             repaint();
+            refreshClock.start();
+            motionClock.start();
         }
         else if(event.getSource() == exitButton){
             System.exit(0);
         }
     }
 }
+
+private class clockhandler implements ActionListener{
+    public void actionPerformed(ActionEvent event){
+        boolean result = false;
+        if(event.getSource()==refreshClock)
+            repaint();
+        else if(event.getSource()==motionClock){
+            result = graphicPanel.moveBall();
+            if (result)
+                repaint();
+            else{
+                motionClock.stop();
+                refreshClock.stop();
+                System.out.println("123");
+
+            }
+        }  //  motion clock
+    }  //  end of action performed
+}  //  end of clockhandler
 
 
 
