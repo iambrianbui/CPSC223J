@@ -57,10 +57,12 @@ public class ballUI extends JFrame{
     private JLabel angleText;
     private JTextField textAngle;
 
-    private JLabel dummy;
-    private JLabel prompt;
+    private JLabel mathPrompt;
+    private JLabel javaPrompt;
     private JLabel javaCoord;
+    private String jC = "0, 0";
     private JLabel mathCoord;
+    private String mC = "0, 0";
 
     private Graphicpanelclass graphicPanel;             //  2
 
@@ -73,6 +75,8 @@ public class ballUI extends JFrame{
     double motionClockRate = 20;                        //  How many updates per second
     int motionClockDelayInt;
     final double msPerSec = 1000;
+
+    public String startButtonText = "Start";
 
 
     private FlowLayout simpleFlow;
@@ -121,19 +125,23 @@ public class ballUI extends JFrame{
         textAngle = new JTextField(6);
         buttonPanel.add(textAngle);
 
-        prompt = new JLabel();
-        prompt.setText("Coordinates of ball:  ");
-        buttonPanel.add(prompt);
+        javaPrompt = new JLabel();
+        javaPrompt.setText("Java Coordinates of ball:  ");
+        buttonPanel.add(javaPrompt);
 
         javaCoord = new JLabel();
-        javaCoord.setText("proxy");
+        javaCoord.setText(jC);
         buttonPanel.add(javaCoord);
 
+        mathPrompt = new JLabel();
+        mathPrompt.setText("Math Coordinates of ball:  ");
+        buttonPanel.add(mathPrompt);
+
         mathCoord = new JLabel();
-        mathCoord.setText("proxy2");
+        mathCoord.setText(mC);
         buttonPanel.add(mathCoord);
 
-        startButton = new JButton("Start");
+        startButton = new JButton(startButtonText);
         buttonPanel.add(startButton);
         exitButton = new JButton("Exit");
         buttonPanel.add(exitButton);
@@ -161,29 +169,59 @@ public class ballUI extends JFrame{
     }  //  end of constructor
 
 //  buttons
+int index = 0;
+
 private class buttonhandler implements ActionListener{
     public void actionPerformed(ActionEvent event){
         if (event.getSource()==startButton){
-            float speed = 0;
-            float angle = 0;
-            String s = textSpeed.getText();
-            try{
-                speed = Float.parseFloat(s);
-            } catch(NumberFormatException e){
-                System.out.println("not a float");
-            }
-            s = textAngle.getText();
-            try{
-                angle = Float.parseFloat(s);
-            } catch(NumberFormatException e){
-                System.out.println("not a float, angle");
-            }
-            javaCoord.setText("Speed is:  " +speed);
-            graphicPanel.initSpeedAngle(speed, angle);
-            graphicPanel.initBall();
-            repaint();
-            refreshClock.start();
-            motionClock.start();
+            switch(index){
+                case 0:
+                float speed = 0;
+                float angle = 0;
+                String s = textSpeed.getText();
+                try{
+                    speed = Float.parseFloat(s);
+                } catch(NumberFormatException e){
+                    System.out.println("not a float");
+                }
+                s = textAngle.getText();
+                try{
+                    angle = Float.parseFloat(s);
+                } catch(NumberFormatException e){
+                    System.out.println("not a float, angle");
+                }
+                graphicPanel.initSpeedAngle(speed, angle);
+                graphicPanel.initBall();
+                repaint();
+                refreshClock.start();
+                motionClock.start();
+
+                startButtonText = "Pause";
+                startButton.setText(startButtonText);
+                index = 1;
+
+                break;
+
+                case 1:
+                refreshClock.stop();
+                motionClock.stop();
+                startButtonText = "Resume";
+                startButton.setText(startButtonText);
+                index = 2;
+                break;
+
+
+                case 2:
+                refreshClock.start();
+                motionClock.start();
+                startButtonText = "Pause";
+                startButton.setText(startButtonText);
+                index = 1;
+                break;
+
+
+
+        }
         }
         else if(event.getSource() == exitButton){
             System.exit(0);
@@ -194,8 +232,12 @@ private class buttonhandler implements ActionListener{
 private class clockhandler implements ActionListener{
     public void actionPerformed(ActionEvent event){
         boolean result = false;
-        if(event.getSource()==refreshClock)
+        if(event.getSource()==refreshClock){
             repaint();
+            javaCoord.setText(graphicPanel.returnJC());
+            mathCoord.setText(graphicPanel.returnMC());
+        }
+
         else if(event.getSource()==motionClock){
             result = graphicPanel.moveBall();
             if (result)
@@ -203,6 +245,9 @@ private class clockhandler implements ActionListener{
             else{
                 motionClock.stop();
                 refreshClock.stop();
+                index = 0;
+                startButtonText = "Start";
+                startButton.setText(startButtonText);
                 System.out.println("123");
 
             }
