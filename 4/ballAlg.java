@@ -100,4 +100,22 @@ class Graphicpanelclass extends JPanel{
         return successfulMove;
     }
 
+    public String returnJC(){
+        String X = String.format("%.02f", ballCentX);
+        String Y = String.format("%.02f", ballCentY);
+        String s = X + ", " + Y;
+        return s;
+    }
+
+    public String returnMC(){
+        double MX = (ballCentX-300)/10;
+        double MY = (ballCentY-200)/-10;
+        String X = String.format("%.02f", MX);
+        String Y = String.format("%.02f", MY);
+        String s = X + ", " + Y;;
+        return s;
+    }
+
+
+
 }  //  end of Graphicpanelclass
