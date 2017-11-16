@@ -2,7 +2,7 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  31 October 2017
-//Last edited:  13 November 2017
+//Last edited:  14 November 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #4
@@ -29,12 +29,15 @@ import javax.swing.JPanel;
 
 class Graphicpanelclass extends JPanel{
 
+    //  variables attaining to the ball
     double ballCentX;
     double ballCentY;
     double ballUCX;
     double ballUCY;
     double ballRadius = 8;
     double ballDia = 2*ballRadius;
+    
+    //  variables attaining to motion
     boolean motion = false;
     double speed = 0;
     double angle = 0;
@@ -49,10 +52,12 @@ class Graphicpanelclass extends JPanel{
     //  grid
     g2.setColor(Color.BLACK);
     g2.setStroke(new BasicStroke(3f));
-
+        
+        //  baseline
     g2.drawLine(300,0,300,400);
     g2.drawLine(0,200,600,200);
     g2.setStroke(new BasicStroke(1f));
+        //  ticks
     for (int i = 0; i<401; i++){
         g2.drawLine(296,i,304,i);
         i+=9;
@@ -61,14 +66,16 @@ class Graphicpanelclass extends JPanel{
         g2.drawLine(i,196,i,204);
         i+=9;
     }
-
+        
+        //  the ball
     if (motion == true){
         g2.setColor(Color.RED);
         g2.fillOval((int)ballUCX, (int)ballUCY, (int)ballDia, (int)ballDia);
     }
 
 }  //  end of paintComponent
-
+    
+    //  initialize where the ball should be going
     public void initSpeedAngle(float sp, float an){
         speed = sp;
         angle = an;
@@ -78,7 +85,8 @@ class Graphicpanelclass extends JPanel{
         System.out.println(angle);
 
     }
-
+    
+    //  initialize the ball
     public void initBall(){
         ballCentX = 300;
         ballCentY = 200;
@@ -87,7 +95,8 @@ class Graphicpanelclass extends JPanel{
         motion = true;
 
     }  //  end of initBall
-
+    
+    //  move the ball
     public boolean moveBall(){
         boolean successfulMove = false;
         if (ballCentX+ballRadius>=0.0 && ballCentY+ballRadius>=0.0 && ballCentX-ballRadius<=600 && ballCentY-ballRadius<=400){
@@ -99,14 +108,16 @@ class Graphicpanelclass extends JPanel{
         }
         return successfulMove;
     }
-
+    
+    //  return the java coordinates
     public String returnJC(){
         String X = String.format("%.02f", ballCentX);
         String Y = String.format("%.02f", ballCentY);
         String s = X + ", " + Y;
         return s;
     }
-
+    
+    //  return the math coordinates
     public String returnMC(){
         double MX = (ballCentX-300)/10;
         double MY = (ballCentY-200)/-10;
