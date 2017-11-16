@@ -2,7 +2,7 @@
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
 //Created on:  31 October 2017
-//Last edited:  13 November 2017
+//Last edited:  14 November 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
 //Assignment:     #4
@@ -39,10 +39,12 @@ import java.awt.event.ItemEvent;
 import javax.swing.Timer;
 import java.lang.Math;
 
+//  party time
 public class ballUI extends JFrame{
     //  300 x 400 graphicpanel
     //  600 total height
-
+    
+    //  frame
     private final int frameHeight = 600;
     private final int frameWidth = 600;
 
@@ -78,7 +80,6 @@ public class ballUI extends JFrame{
 
     public String startButtonText = "Start";
 
-
     private FlowLayout simpleFlow;
     private GridLayout bottomGrid;
 
@@ -112,7 +113,7 @@ public class ballUI extends JFrame{
         //  third panel:  buttons and such
         buttonPanel = new JPanel();
         buttonPanel.setLayout(bottomGrid);
-
+         
         speedText = new JLabel();
         speedText.setText("Speed:  ");
         buttonPanel.add(speedText);
@@ -169,12 +170,14 @@ public class ballUI extends JFrame{
     }  //  end of constructor
 
 //  buttons
-int index = 0;
+int index = 0;                  //  index for the button
 
 private class buttonhandler implements ActionListener{
     public void actionPerformed(ActionEvent event){
+        //  start, pause, resume
         if (event.getSource()==startButton){
             switch(index){
+                    //  base
                 case 0:
                 float speed = 0;
                 float angle = 0;
@@ -190,6 +193,8 @@ private class buttonhandler implements ActionListener{
                 } catch(NumberFormatException e){
                     System.out.println("not a float, angle");
                 }
+                    
+                    //  initialize the ball movements
                 graphicPanel.initSpeedAngle(speed, angle);
                 graphicPanel.initBall();
                 repaint();
@@ -201,7 +206,8 @@ private class buttonhandler implements ActionListener{
                 index = 1;
 
                 break;
-
+                    
+                    //  paused
                 case 1:
                 refreshClock.stop();
                 motionClock.stop();
@@ -210,7 +216,7 @@ private class buttonhandler implements ActionListener{
                 index = 2;
                 break;
 
-
+                    // resume
                 case 2:
                 refreshClock.start();
                 motionClock.start();
@@ -218,17 +224,17 @@ private class buttonhandler implements ActionListener{
                 startButton.setText(startButtonText);
                 index = 1;
                 break;
-
-
-
         }
         }
+        
+        //  exit
         else if(event.getSource() == exitButton){
             System.exit(0);
-        }
-    }
-}
+        }  //  end of exitButton
+    }  //  end of actionperformed
+}  //  end of buttonhandler
 
+    //  handling to fps
 private class clockhandler implements ActionListener{
     public void actionPerformed(ActionEvent event){
         boolean result = false;
