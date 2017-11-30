@@ -35,9 +35,9 @@ class Graphicpanelclass extends JPanel{
         g2.setColor(Color.BLACK);
         g2.setStroke(new BasicStroke(3f));
 
-        g2.drawOval(0,0,100,100);
-        g2.drawOval(0,0,200,200);
-        g2.drawOval(0,0,300,300);
+        g2.drawOval(150,150,100,100);
+        g2.drawOval(100,100,200,200);
+        g2.drawOval(50,50,300,300);
 
     }
 }
