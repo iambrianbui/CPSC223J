@@ -114,10 +114,48 @@ public class curveDrawUI extends JFrame{
         add(graphicPanel);
         add(buttonPanel);
 
+        //  handlers and listeners
+        buttonhandler bhandle = new buttonhandler();
+        startButton.addActionListener(bhandle);
+        exitButton.addActionListener(bhandle);
 
+        clockhandler chandle = new clockhandler();
 
+        //  refresh clock
+        refreshClockDelayInt = (int)Math.round(msPerSec/refreshFPS);
+        refreshClock = new Timer(refreshClockDelayInt, chandle);
 
+        //  motion clock
+        motionClockDelayInt = (int)Math.round(msPerSec/motionClockRate);
+        motionClock = new Timer(motionClockDelayInt, chandle);
 
+    }  //  end of constructor
+
+    private class buttonhandler implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            //  start
+            if (event.getSource()==startButton){
+                graphicPanel.start();
+                repaint();
+                refreshClock.start();
+                motionClock.start();
+            }  //  end of start
+            //  exit
+            else if (event.getSource()==exitButton){
+                System.exit(0);
+            }  //  end of exit
+        }  //  end of actionperformed
+    }  //  end of buttonhandler
+
+    private class clockhandler implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            if(event.getSource()==refreshClock){
+                repaint();
+            }
+            else if(event.getSource()==motionClock){
+                repaint();
+            }
+        }
     }
 
 
