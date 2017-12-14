@@ -114,6 +114,14 @@ public class polyDrawUI extends JFrame{
         textSpeed = new JTextField(4);
         buttonPanel.add(textSpeed);
 
+        xLocal = new JLabel();
+        xLocal.setText("X = ");
+        buttonPanel.add(xLocal);
+
+        yLocal = new JLabel();
+        yLocal.setText("Y = ");
+        buttonPanel.add(yLocal);
+
         startButton = new JButton("Start");
         buttonPanel.add(startButton);
         pauseButton = new JButton("Pause");
@@ -144,34 +152,47 @@ public class polyDrawUI extends JFrame{
 
     }  //  end of constructor
 
+    int index = 0;
+
     private class buttonhandler implements ActionListener{
         public void actionPerformed(ActionEvent event){
             //  start
             if (event.getSource()==startButton){
-                if(graphicPanel.amIgoing()==false){
+                    graphicPanel.reset();
                     float speed = 0;
                     String s = textSpeed.getText();
+
+                    //  get the number from the text field
                     try{
                         speed = Float.parseFloat(s);
                     } catch(NumberFormatException e){
-                        System.out.println("not a float");
+                        System.out.println("not a float")
+                        ;
                     }
                     graphicPanel.initSpeed(speed);
+
                     graphicPanel.start();
                     repaint();
                     refreshClock.start();
                     motionClock.start();
-                }  //  first time use
-                else{
-                graphicPanel.start();
-                repaint();
-                refreshClock.start();
-                motionClock.start();
-            }
             }  //  end of start
+
             else if(event.getSource()==pauseButton){
-                refreshClock.stop();
-                motionClock.stop();
+                switch(index){
+                    case 0:
+                        refreshClock.stop();
+                        motionClock.stop();
+                        pauseButton.setText("Resume");
+                        index = 1;
+                        break;
+                    case 1:
+                        refreshClock.start();
+                        motionClock.start();
+                        pauseButton.setText("Pause");
+                        index = 0;
+                        break;
+                    }
+
             }
             //  exit
             else if (event.getSource()==exitButton){
@@ -184,10 +205,13 @@ public class polyDrawUI extends JFrame{
         public void actionPerformed(ActionEvent event){
             if(event.getSource()==refreshClock){
                 repaint();
-            }
+                xLocal.setText("X = "+graphicPanel.returnXC());
+                yLocal.setText("Y = "+graphicPanel.returnYC());
+
+            }  //  end of refersn clock
             else if(event.getSource()==motionClock){
                 repaint();
-            }
+            }  //  end of motionclock
         }
     }
 

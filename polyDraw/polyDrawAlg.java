@@ -45,8 +45,8 @@ class Graphicpanelclass extends JPanel{
     double speed;
 
     //  history of past coordinates
-    int xHist[] = new int[720];
-    int yHist[] = new int[720];
+    int xHist[] = new int[20000];
+    int yHist[] = new int[20000];
 
 
     //  start
@@ -61,7 +61,6 @@ class Graphicpanelclass extends JPanel{
     public void maths(){
         //  the actual function we want to paint
     y = -((x*x*x)+(3*(x*x)-x-3));
-        //  converting back to cartesian
         //  multiply by the scale
     xscaled = scale*x;
     yscaled = scale*y;
@@ -83,7 +82,28 @@ class Graphicpanelclass extends JPanel{
         g2.setStroke(new BasicStroke(3f));
 
         g2.drawLine(200,0,200,400);  //  y
+        g2.drawString("-4.0", 215,40);
+        g2.drawString("-3.0", 215,80);
+        g2.drawString("-2.0", 215,120);
+        g2.drawString("-1.0", 215,160);
+
+        g2.drawString("1.0", 215,240);
+        g2.drawString("2.0", 215,280);
+        g2.drawString("3.0", 215,320);
+        g2.drawString("4.0", 215,360);
+
+
         g2.drawLine(0,200,400,200);  //  x
+        g2.drawString("-1.0", 150,215);
+        g2.drawString("-2.0", 110,215);
+        g2.drawString("-3.0", 70,215);
+        g2.drawString("-4.0", 30,215);
+
+        g2.drawString("1.0", 230,215);
+        g2.drawString("2.0", 270,215);
+        g2.drawString("3.0", 310,215);
+        g2.drawString("4.0", 340,215);
+
 
         //  ticks
         g2.setStroke(new BasicStroke(1f));
@@ -109,11 +129,11 @@ class Graphicpanelclass extends JPanel{
     }  //  end of paintComponent
 
     public void initSpeed(double sp){
-        speed = sp * 0.002;
+        speed = sp * 0.007;
     }
 
     public void updateC(){
-        if(t<=720){                             //  restrict the period
+        if(t<=19999 || x<=4){                             //  restrict the period
         t = t+1;
         x = x + speed;
     }
@@ -123,7 +143,20 @@ class Graphicpanelclass extends JPanel{
         maths();
     }  //  end of update
 
-    public boolean amIgoing(){
-        return go;
-    }  //  end of amIgoing
+    public void reset(){
+        x = -3.5;
+        t = 0;
+    }  //  end of reset
+
+
+//  return the values of X and Y, note that Y must be returned in negative.
+    public String returnXC(){
+        String XC = String.format("%.02f", x);
+        return XC;
+    }  //  end of return XC
+
+    public String returnYC(){
+        String YC = String.format("%.02f", -y);
+        return YC;
+    }  //  end of return YC
 }
