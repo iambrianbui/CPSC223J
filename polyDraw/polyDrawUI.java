@@ -1,11 +1,11 @@
 //Ruler:=1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1=========2=========3
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
-//Created on:  21 November 2017
-//Last edited:  21 November 2017
+//Created on:  14 December 2017
+//Last edited:  14 December 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
-//Assignment:     #5
+//Assignment:     FINAL
 //Due date:
 
 //Purpose of this program:
@@ -56,6 +56,10 @@ public class polyDrawUI extends JFrame{
     private JButton startButton;
     private JButton pauseButton;
     private JButton exitButton;
+    private JTextField textSpeed;
+    private JLabel promptSpeed;
+    private JLabel xLocal;
+    private JLabel yLocal;
 
     private JLabel xCoordText;
     private JLabel yCoordText;
@@ -77,7 +81,7 @@ public class polyDrawUI extends JFrame{
         //  frame properties
         super("Polynomial Curve");
         simpleFlow = new FlowLayout();
-        bottomGrid = new GridLayout(1,4);
+        bottomGrid = new GridLayout(2,4);
         setLayout(simpleFlow);
         setSize(frameWidth, frameHeight);
         setLocationRelativeTo(null);
@@ -103,6 +107,12 @@ public class polyDrawUI extends JFrame{
         //  third panel:  buttons and such
         buttonPanel = new JPanel();
         buttonPanel.setLayout(bottomGrid);
+
+        promptSpeed = new JLabel();
+        promptSpeed.setText("Speed:  ");
+        buttonPanel.add(promptSpeed);
+        textSpeed = new JTextField(4);
+        buttonPanel.add(textSpeed);
 
         startButton = new JButton("Start");
         buttonPanel.add(startButton);
@@ -138,10 +148,26 @@ public class polyDrawUI extends JFrame{
         public void actionPerformed(ActionEvent event){
             //  start
             if (event.getSource()==startButton){
+                if(graphicPanel.amIgoing()==false){
+                    float speed = 0;
+                    String s = textSpeed.getText();
+                    try{
+                        speed = Float.parseFloat(s);
+                    } catch(NumberFormatException e){
+                        System.out.println("not a float");
+                    }
+                    graphicPanel.initSpeed(speed);
+                    graphicPanel.start();
+                    repaint();
+                    refreshClock.start();
+                    motionClock.start();
+                }  //  first time use
+                else{
                 graphicPanel.start();
                 repaint();
                 refreshClock.start();
                 motionClock.start();
+            }
             }  //  end of start
             else if(event.getSource()==pauseButton){
                 refreshClock.stop();

@@ -1,11 +1,11 @@
 //Ruler:=1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1=========2=========3
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
-//Created on:  21 November 2017
-//Last edited:  21 November 2017
+//Created on:  14 December 2017
+//Last edited:  14 December 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
-//Assignment:     #5
+//Assignment:     FINAL
 //Due date:
 
 //Purpose of this program:
@@ -37,11 +37,12 @@ class Graphicpanelclass extends JPanel{
 
     int t = 0;
     double functions;
-    double x = -5;
+    double x = -3.5;
     double y;
     boolean go = false;
     double xscaled;
     double yscaled;
+    double speed;
 
     //  history of past coordinates
     int xHist[] = new int[720];
@@ -107,16 +108,22 @@ class Graphicpanelclass extends JPanel{
         }
     }  //  end of paintComponent
 
+    public void initSpeed(double sp){
+        speed = sp * 0.002;
+    }
 
     public void updateC(){
         if(t<=720){                             //  restrict the period
         t = t+1;
-        x = x + 0.025;
+        x = x + speed;
     }
     else{
         go = false;
     }
         maths();
-    }
+    }  //  end of update
 
+    public boolean amIgoing(){
+        return go;
+    }  //  end of amIgoing
 }

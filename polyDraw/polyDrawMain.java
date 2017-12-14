@@ -1,11 +1,11 @@
 //Ruler:=1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1=========2=========3
 //Created by:  Brian Bui
 //            iambrianbui@csu.fullerton.edu
-//Created on:  21 November 2017
-//Last edited:  21 November 2017
+//Created on:  14 December 2017
+//Last edited:  14 December 2017
 //Course:         Cpsc 223J
 //Semester:       2017 Fall
-//Assignment:     #5
+//Assignment:     FINAL
 //Due date:
 
 //Purpose of this program:
